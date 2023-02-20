@@ -6,10 +6,21 @@ import vueJsx from "@vitejs/plugin-vue-jsx"
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: "",
+      },
+    },
+  },
   plugins: [vue(), vueJsx()],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "@cmp": fileURLToPath(new URL("./src/components", import.meta.url)),
     },
+  },
+  server: {
+    port: 9000,
   },
 })
