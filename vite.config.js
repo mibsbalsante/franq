@@ -17,7 +17,9 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "@ast": fileURLToPath(new URL("./src/assets", import.meta.url)),
       "@cmp": fileURLToPath(new URL("./src/components", import.meta.url)),
+      "@str": fileURLToPath(new URL("./src/stores", import.meta.url)),
     },
   },
   server: {
