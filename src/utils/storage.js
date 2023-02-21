@@ -1,7 +1,11 @@
-export const saveToStorage = (key, list) =>
-  window.localStorage.setItem(key, JSON.stringify(list))
+const storageType = useSession =>
+  useSession ? "sessionStorage" : "localStorage"
 
-export const getFromStorage = key =>
-  JSON.parse(window.localStorage.getItem(key)) || {}
+export const saveToStorage = (key, list, useSession = false) =>
+  window[storageType(useSession)].setItem(key, JSON.stringify(list))
 
-export const deleteFromStorage = key => window.localStorage.removeItem(key)
+export const getFromStorage = (key, useSession = false) =>
+  JSON.parse(window[storageType(useSession)].getItem(key)) || {}
+
+export const deleteFromStorage = (key, useSession = false) =>
+  window[storageType(useSession)].removeItem(key)
