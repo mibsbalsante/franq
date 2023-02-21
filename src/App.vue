@@ -1,12 +1,29 @@
 <script setup>
-import { RouterView } from "vue-router"
+import { ref, onMounted, onUnmounted } from "vue"
+import { RouterView, useRouter } from "vue-router"
 
-import { useFinanceStore, useFinanceActions } from "@str/finance"
+import { useUserActions } from "@/stores/auth"
 
-// const { finance } = useFinanceStore()
-const { getResults } = useFinanceActions()
+// 5 min interval
+const VALIDATION_INTERVAL = 1000 * 60 * 5
 
-getResults()
+const router = useRouter()
+const { checkIfLoggedIn, logout } = useUserActions()
+
+const validationIntervalId = ref(null)
+
+onMounted(() => {
+  validationIntervalId.value = setInterval(() => {
+    if (!checkIfLoggedIn()) {
+      logout()
+      router.push({ name: "login" })
+    }
+  }, VALIDATION_INTERVAL)
+})
+onUnmounted(() => {
+  clearInterval(validationIntervalId.value)
+  validationIntervalId.value = null
+})
 </script>
 
 <template>

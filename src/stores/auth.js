@@ -1,4 +1,4 @@
-import { ref, computed } from "vue"
+import { ref } from "vue"
 import { defineStore, storeToRefs } from "pinia"
 
 import { saveToStorage, getFromStorage, deleteFromStorage } from "@utl/storage"
@@ -10,7 +10,6 @@ const authStore = defineStore("auth", () => {
   const expirationDate = ref(
     cachedData?.expirationDate ? new Date(cachedData?.expirationDate) : null
   )
-  const isLoggedIn = computed(() => !!username.value)
 
   function _setExpirationDate() {
     // two hours in the future
@@ -19,9 +18,11 @@ const authStore = defineStore("auth", () => {
     return date
   }
 
-  function _checkIfExpiredLogin() {
+  function _checkIfValidExpirationDate() {
+    if (!expirationDate.value) return false
+
     const now = new Date()
-    return now.getTime() >= expirationDate.value.getTime()
+    return now.getTime() < expirationDate.value.getTime()
   }
 
   function login({ username: user, password }) {
@@ -36,12 +37,10 @@ const authStore = defineStore("auth", () => {
   }
 
   function checkIfLoggedIn() {
-    if (!username.value || _checkIfExpiredLogin()) {
-      login()
-    }
+    return !!username.value || _checkIfValidExpirationDate()
   }
 
-  return { username, isLoggedIn, login, logout, checkIfLoggedIn }
+  return { username, login, logout, checkIfLoggedIn }
 })
 
 export const useAuthStore = () => storeToRefs(authStore())
