@@ -1,5 +1,6 @@
 <script setup>
 import { useFinanceStore } from "@str/finance"
+import CurrencyCard from "@cmp/CurrencyCard.vue"
 
 const { stats } = useFinanceStore()
 
@@ -13,21 +14,26 @@ const formatCurrency = (val, format = "BRL") => {
 </script>
 
 <template>
-  <main>
-    <div>
-      <h2>Currencies</h2>
+  <main class="page">
+    <div class="category">
+      <h2 class="category__title">Currencies</h2>
 
-      <div v-for="currency in stats?.currencies" :key="currency.name">
-        <template v-if="currency.name">
-          <h3>{{ currency.name }}</h3>
-          <p>{{ formatCurrency(currency.buy) }}</p>
-          <p class="variation">{{ currency.variation }}%</p>
-        </template>
-      </div>
+      <template
+        v-for="(currency, id) in stats?.currencies"
+        :key="currency.name"
+      >
+        <CurrencyCard
+          v-if="currency.name"
+          v-bind="currency"
+          :id="id"
+          type="currencies"
+          :value="formatCurrency(currency.buy)"
+        />
+      </template>
     </div>
 
-    <div>
-      <h2>Stocks</h2>
+    <div class="category">
+      <h2 class="category__title">Stocks</h2>
 
       <div v-for="stock in stats?.stocks" :key="stock.name">
         <template v-if="stock.name">
@@ -38,18 +44,39 @@ const formatCurrency = (val, format = "BRL") => {
       </div>
     </div>
 
-    <div>
-      <h2>Bitcoin</h2>
+    <div class="category">
+      <h2 class="category__title">Bitcoin</h2>
 
-      <div v-for="crypto in stats?.bitcoin" :key="crypto.name">
-        <template v-if="crypto.name">
-          <h3>{{ crypto.name }}</h3>
-          <p>
-            {{ formatCurrency(crypto.last, crypto.format?.[0]) }}
-          </p>
-          <p class="variation">{{ crypto.variation }}%</p>
-        </template>
-      </div>
+      <template v-for="(crypto, id) in stats?.bitcoin" :key="crypto.name">
+        <CurrencyCard
+          v-if="crypto.name"
+          v-bind="crypto"
+          :id="id"
+          type="bitcoin"
+          :value="formatCurrency(crypto.last, crypto.format?.[0])"
+        />
+      </template>
     </div>
   </main>
 </template>
+
+<style lang="scss" scoped>
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.category {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 24px;
+
+  @include container;
+
+  &__title {
+    margin: 0;
+    width: 100%;
+  }
+}
+</style>

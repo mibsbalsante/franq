@@ -39,6 +39,7 @@ const handleLogout = () => {
   background-color: var(--color-primary);
   color: var(--color-white);
   box-shadow: var(--shadow);
+  z-index: 1;
 
   &__container {
     @include container;

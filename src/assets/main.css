@@ -45,5 +45,5 @@ button[disabled] {
 
 #app {
   position: relative;
-  padding-top: calc(var(--size-header) + 24px);
+  padding: calc(var(--size-header) + 32px) 0 40px;
 }
