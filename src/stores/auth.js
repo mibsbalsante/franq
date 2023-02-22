@@ -25,9 +25,19 @@ const authStore = defineStore("auth", () => {
     return now.getTime() < expirationDate.value.getTime()
   }
 
+  function _updateLoginData() {
+    expirationDate.value = _setExpirationDate()
+    saveToStorage(
+      "auth",
+      { user: username.value, expirationDate: expirationDate.value },
+      true
+    )
+  }
+
   function login({ username: user, password }) {
     if (user && password) username.value = user
-    saveToStorage("auth", { user, expirationDate: _setExpirationDate() }, true)
+
+    _updateLoginData()
   }
 
   function logout() {
@@ -37,7 +47,10 @@ const authStore = defineStore("auth", () => {
   }
 
   function checkIfLoggedIn() {
-    return !!username.value || _checkIfValidExpirationDate()
+    const isLoginValid = !!username.value && _checkIfValidExpirationDate()
+
+    if (isLoginValid) _updateLoginData()
+    return isLoginValid
   }
 
   return { username, login, logout, checkIfLoggedIn }

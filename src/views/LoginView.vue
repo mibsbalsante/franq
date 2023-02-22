@@ -10,7 +10,7 @@ const password = ref(null)
 
 const handleSubmit = () => {
   login({ username: username.value, password: password.value })
-  router.push({ name: "dashboard" })
+  setTimeout(() => router.push({ name: "dashboard" }), 100)
 }
 </script>
 
