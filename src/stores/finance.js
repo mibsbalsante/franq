@@ -1,24 +1,30 @@
 // https://hgbrasil.com/status/finance/
 
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import { defineStore, storeToRefs } from "pinia"
 
 import { saveToStorage, getFromStorage } from "@utl/storage"
 
+import { INTERVAL_AS_MILISECONDS } from "@utl/time"
+
 const apiURL = import.meta.env.VITE_API_URL
 
 const financeStore = defineStore("finance", () => {
-  const transactions = ref(getFromStorage())
   const isLoading = ref(false)
 
-  function getResults() {
-    const cachedData = getFromStorage("finance")
+  const history = ref(getFromStorage() || [])
+  const stats = computed(() => history.value?.[0]?.results)
 
-    if (cachedData?.date) {
-      transactions.value = cachedData.results
-      return
-    }
+  const selected = ref({ type: null, keyName: null })
+  const selectedChart = computed(() => {
+    if (!selected.value?.keyName) return null
 
+    return history.value.map(
+      requests => requests.results[selected.value.type][selected.value.keyName]
+    )
+  })
+
+  function fetchResults() {
     isLoading.value = true
 
     fetch(apiURL, { method: "GET", mode: "cors" })
@@ -30,14 +36,34 @@ const financeStore = defineStore("finance", () => {
         })
       })
       .then(data => {
-        transactions.value = data.results
-        saveToStorage("finance", { ...data, date: new Date() })
+        const date = new Date()
+        history.value = [{ results: data.results, date }, ...history.value]
+        saveToStorage("finance", history.value)
       })
       .catch(({ message }) => console.error(message))
       .finally(() => (isLoading.value = false))
   }
 
-  return { transactions, isLoading, getResults }
+  function _isBetweenInterval(lastRequest) {
+    if (!lastRequest) return false
+
+    const now = new Date()
+    const lastRequestDate = new Date(lastRequest.date)
+
+    return now - lastRequestDate <= INTERVAL_AS_MILISECONDS
+  }
+
+  function _getResults() {
+    const cachedData = getFromStorage("finance")
+
+    if (cachedData) history.value = cachedData
+    if (_isBetweenInterval(cachedData?.[0])) return
+    fetchResults()
+  }
+
+  _getResults()
+
+  return { isLoading, history, stats, selected, selectedChart, fetchResults }
 })
 
 export const useFinanceStore = () => storeToRefs(financeStore())

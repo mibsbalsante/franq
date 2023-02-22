@@ -44,4 +44,4 @@ const authStore = defineStore("auth", () => {
 })
 
 export const useAuthStore = () => storeToRefs(authStore())
-export const useUserActions = () => authStore()
+export const useAuthActions = () => authStore()

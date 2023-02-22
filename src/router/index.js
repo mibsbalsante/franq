@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router"
 import DashboardView from "../views/DashboardView.vue"
 import LoginView from "../views/LoginView.vue"
 
-import { useUserActions } from "@/stores/auth"
+import { useAuthActions } from "@/stores/auth"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,7 +21,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, _, next) => {
-  const { checkIfLoggedIn, logout } = useUserActions()
+  const { checkIfLoggedIn, logout } = useAuthActions()
   const isLoggedIn = checkIfLoggedIn()
 
   if (!isLoggedIn && to.name !== "login") {

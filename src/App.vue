@@ -2,13 +2,11 @@
 import { ref, onMounted, onUnmounted } from "vue"
 import { RouterView, useRouter } from "vue-router"
 
-import { useUserActions } from "@/stores/auth"
-
-// 5 min interval
-const VALIDATION_INTERVAL = 1000 * 60 * 5
+import { useAuthActions } from "@/stores/auth"
+import { INTERVAL_AS_MILISECONDS } from "@utl/time"
 
 const router = useRouter()
-const { checkIfLoggedIn, logout } = useUserActions()
+const { checkIfLoggedIn, logout } = useAuthActions()
 
 const validationIntervalId = ref(null)
 
@@ -18,7 +16,7 @@ onMounted(() => {
       logout()
       router.push({ name: "login" })
     }
-  }, VALIDATION_INTERVAL)
+  }, INTERVAL_AS_MILISECONDS)
 })
 onUnmounted(() => {
   clearInterval(validationIntervalId.value)
