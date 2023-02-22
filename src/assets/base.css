@@ -5,8 +5,8 @@
   --color-grey-2: #262626;
   --color-black: #1d1d1d;
   --color-primary: #687bea;
-  --color-positive: #b6e2a1;
-  --color-negative: #febe8c;
+  --color-positive: #6bcb77;
+  --color-negative: #fd5d5d;
 
   /* scheme vars */
   --color-text: var(--color-black);
@@ -31,9 +31,11 @@
   --size-header: 70px;
   --spacing-form-elements: 12px 24px;
 
-  --shadow: 0 0 8px -2px var(--color-black);
+  --shadow: 0 0 10px -4px var(--color-grey-2);
 
   --font-small: 0.875rem;
+
+  --border-rounded: 100px;
 }
 
 @media (max-width: 768px) {

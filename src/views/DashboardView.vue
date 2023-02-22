@@ -1,6 +1,7 @@
 <script setup>
 import { useFinanceStore } from "@str/finance"
 import CurrencyCard from "@cmp/CurrencyCard.vue"
+import StockCard from "@cmp/StockCard.vue"
 
 const { stats } = useFinanceStore()
 
@@ -16,6 +17,14 @@ const formatCurrency = (val, format = "BRL") => {
 <template>
   <main class="page">
     <div class="category">
+      <h2 class="category__title">Stocks</h2>
+
+      <template v-for="(stock, id) in stats?.stocks" :key="stock.name">
+        <StockCard v-if="stock.name" v-bind="stock" :id="id" type="stocks" />
+      </template>
+    </div>
+
+    <div class="category">
       <h2 class="category__title">Currencies</h2>
 
       <template
@@ -30,18 +39,6 @@ const formatCurrency = (val, format = "BRL") => {
           :value="formatCurrency(currency.buy)"
         />
       </template>
-    </div>
-
-    <div class="category">
-      <h2 class="category__title">Stocks</h2>
-
-      <div v-for="stock in stats?.stocks" :key="stock.name">
-        <template v-if="stock.name">
-          <h3>{{ stock.name }}</h3>
-          <p>{{ stock.location }}</p>
-          <p class="variation">{{ stock.variation }}%</p>
-        </template>
-      </div>
     </div>
 
     <div class="category">
@@ -70,11 +67,12 @@ const formatCurrency = (val, format = "BRL") => {
 .category {
   display: flex;
   flex-wrap: wrap;
-  gap: 32px 24px;
+  gap: 36px 24px;
 
   @include container;
 
   &__title {
+    font-size: 2.2rem;
     margin: 0;
     width: 100%;
   }
