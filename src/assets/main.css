@@ -1,5 +1,11 @@
 @import "./base.css";
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   min-height: 100vh;
   margin: 0;
@@ -38,7 +44,6 @@ button[disabled] {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  position: relative;
+  padding-top: calc(var(--size-header) + 24px);
 }

@@ -3,6 +3,7 @@
   --color-white: #fcfcfc;
   --color-grey: #979797;
   --color-black: #262626;
+  --color-primary: #687bea;
 
   /* scheme vars */
   --color-text: var(--color-black);
@@ -19,3 +20,19 @@
   }
 }
 /* -- -- */
+
+/* -- Misc Variables */
+:root {
+  --size-header: 70px;
+  --spacing-form-elements: 12px 24px;
+
+  --shadow: 0 0 8px -2px var(--color-black);
+
+  --font-small: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --spacing-form-elements: 6px 16px;
+  }
+}
