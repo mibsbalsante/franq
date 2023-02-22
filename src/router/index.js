@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"
 import DashboardView from "../views/DashboardView.vue"
 import LoginView from "../views/LoginView.vue"
+import ModalView from "../views/ModalView.vue"
 
 import { useAuthActions } from "@/stores/auth"
 
@@ -11,6 +12,12 @@ const router = createRouter({
       path: "/",
       name: "dashboard",
       component: DashboardView,
+      children: [
+        {
+          path: ":type/:keyName",
+          component: ModalView,
+        },
+      ],
     },
     {
       path: "/login",

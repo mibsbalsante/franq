@@ -1,27 +1,36 @@
 // https://hgbrasil.com/status/finance/
 
 import { ref, computed } from "vue"
+import { useRoute } from "vue-router"
 import { defineStore, storeToRefs } from "pinia"
 
 import { saveToStorage, getFromStorage } from "@utl/storage"
-
 import { INTERVAL_AS_MILISECONDS } from "@utl/time"
 
 const apiURL = import.meta.env.VITE_API_URL
 
 const financeStore = defineStore("finance", () => {
+  const _route = useRoute()
+
   const isLoading = ref(false)
 
   const history = ref(getFromStorage() || [])
   const stats = computed(() => history.value?.[0]?.results)
 
-  const selected = ref({ type: null, keyName: null })
+  const selected = computed(() => _route.params)
   const selectedChart = computed(() => {
     if (!selected.value?.keyName) return null
 
-    return history.value.map(
-      requests => requests.results[selected.value.type][selected.value.keyName]
+    let chart = history.value.map(requests => ({
+      ...requests.results[selected.value.type][selected.value.keyName],
+      date: new Date(requests.date),
+    }))
+
+    chart = [...chart].sort(
+      ({ date }, { date: date2 }) => date.getTime() - date2.getTime()
     )
+
+    return chart
   })
 
   function fetchResults() {

@@ -1,4 +1,6 @@
 <script setup>
+import { RouterView } from "vue-router"
+
 import { useFinanceStore } from "@str/finance"
 import CurrencyCard from "@cmp/CurrencyCard.vue"
 import StockCard from "@cmp/StockCard.vue"
@@ -55,6 +57,8 @@ const formatCurrency = (val, format = "BRL") => {
       </template>
     </div>
   </main>
+
+  <RouterView />
 </template>
 
 <style lang="scss" scoped>
