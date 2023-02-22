@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from "vue"
 import { RouterView, useRouter } from "vue-router"
 
+import GlobalHeader from "@cmp/GlobalHeader.vue"
 import { useAuthActions } from "@/stores/auth"
 import { INTERVAL_AS_MILISECONDS } from "@utl/time"
 
@@ -14,7 +15,7 @@ onMounted(() => {
   validationIntervalId.value = setInterval(() => {
     if (!checkIfLoggedIn()) {
       logout()
-      router.push({ name: "login" })
+      setTimeout(() => router.push({ name: "login" }), 100)
     }
   }, INTERVAL_AS_MILISECONDS)
 })
@@ -25,7 +26,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header>header</header>
+  <GlobalHeader />
 
   <RouterView />
 </template>
