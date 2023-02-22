@@ -6,7 +6,7 @@ const props = defineProps({
   id: String,
   type: String,
   name: String,
-  value: Number,
+  value: String,
   variation: Number,
 })
 
@@ -40,14 +40,21 @@ const uri = computed(() => `/${props.type}/${props.id}`)
   padding: 32px 18px 24px;
   background-color: var(--color-background-2);
   border-radius: 12px;
-  border: 3px solid var(--local-color-status);
+  border: 3px solid var(--local-border-color);
 
   &--positive {
     --local-color-status: var(--color-positive);
+    --local-border-color: var(--color-positive);
   }
 
   &--negative {
     --local-color-status: var(--color-negative);
+    --local-border-color: var(--color-negative);
+  }
+
+  &:focus-visible {
+    --local-border-color: var(--color-primary);
+    outline: 0;
   }
 
   h3,
@@ -74,9 +81,9 @@ const uri = computed(() => `/${props.type}/${props.id}`)
     padding: 8px 12px;
     font-size: var(--font-small);
     font-weight: 600;
-    border-radius: 100px;
+    border-radius: var(--border-rounded);
     background-color: var(--local-color-status);
-    color: var(--color-black);
+    color: var(--color-white);
   }
 }
 </style>

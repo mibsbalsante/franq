@@ -60,6 +60,12 @@ const handleLogout = () => {
     margin-right: auto;
     text-decoration: none;
     color: var(--color-white);
+    border-radius: var(--border-rounded);
+
+    &:focus-visible {
+      outline: 2px solid var(--color-background);
+      outline-offset: 8px;
+    }
 
     h1 {
       margin: 0;
@@ -85,10 +91,15 @@ const handleLogout = () => {
     background-color: var(--color-text);
     color: var(--color-background);
     border: 0 none;
-    border-radius: 100px;
+    border-radius: var(--border-rounded);
     padding: var(--spacing-form-elements);
     font-weight: 600;
     min-width: 120px;
+
+    &:focus-visible {
+      outline: 2px solid var(--color-background);
+      outline-offset: 4px;
+    }
   }
 
   &__username,
