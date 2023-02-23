@@ -7,6 +7,7 @@ import { useFinanceStore } from "@str/finance"
 
 import IconAngleUp from "@fa/angle-up.svg"
 import IconAngleDown from "@fa/angle-down.svg"
+import IconClose from "@fa/xmark.svg"
 
 const router = useRouter()
 const { selected, selectedChart } = useFinanceStore()
@@ -44,7 +45,9 @@ const handleClose = () => {
         </span>
       </h2>
       <VariationChart :history="selectedChart" :type="selected.type" />
-      <button @click="handleClose" title="Close">x</button>
+      <button class="modal__close" @click="handleClose" title="Close">
+        <IconClose />
+      </button>
     </div>
   </div>
 </template>
@@ -87,15 +90,25 @@ const handleClose = () => {
 
   &__title {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 12px;
-    margin: 0;
+    margin: 0 36px 0 0;
     font-size: 2rem;
     text-transform: capitalize;
 
     &-text {
       margin-right: auto;
     }
+  }
+
+  &__close {
+    background-color: transparent;
+    border: 0 none;
+    position: absolute;
+    top: 32px;
+    right: 24px;
+    height: 3.5rem;
   }
 
   &__icon {
@@ -107,6 +120,10 @@ const handleClose = () => {
     padding: 4px 16px;
     font-size: 1rem;
     font-weight: 600;
+
+    svg {
+      margin-bottom: -4px;
+    }
 
     &--positive {
       --local-color-status: var(--color-positive);
