@@ -11,7 +11,6 @@ import {
   PointElement,
 } from "chart.js"
 
-import { useFinanceStore } from "@str/finance"
 import { formatCurrency } from "@utl/format"
 
 ChartJS.register(
@@ -25,9 +24,8 @@ ChartJS.register(
 
 const props = defineProps({
   history: Array,
+  type: String,
 })
-
-const { selected } = useFinanceStore()
 
 const field = computed(() => {
   const fieldByType = {
@@ -35,7 +33,7 @@ const field = computed(() => {
     currencies: "buy",
     bitcoin: "last",
   }
-  return fieldByType[selected.value.type]
+  return fieldByType[props.type]
 })
 
 const chartData = computed(() => ({

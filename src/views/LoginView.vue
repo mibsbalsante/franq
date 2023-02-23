@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from "vue"
+import { useRouter } from "vue-router"
 
-import router from "@/router"
 import { useAuthActions } from "@str/auth"
 
+const router = useRouter()
 const { login } = useAuthActions()
 const username = ref(null)
 const password = ref(null)

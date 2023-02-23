@@ -1,15 +1,32 @@
 <script setup>
+import { computed } from "vue"
+import { useRouter } from "vue-router"
+
 import VariationChart from "@cmp/VariationChart.vue"
 import { useFinanceStore } from "@str/finance"
 
-const { selectedChart } = useFinanceStore()
+const router = useRouter()
+const { selected, selectedChart } = useFinanceStore()
+
+const selectedName = computed(() => selectedChart.value?.[0]?.name)
+const isLastVariationPositive = computed(
+  () => selectedChart.value?.[selectedChart.value.length - 1]?.variation >= 0
+)
+
+const handleClose = () => {
+  setTimeout(() => router.push({ name: "dashboard" }), 100)
+}
 </script>
 
 <template>
-  <div class="overflow">
+  <div class="overflow" @click.self="handleClose">
     <div class="modal">
-      <h2 class="modal__title">History</h2>
-      <VariationChart :history="selectedChart" />
+      <h2 class="modal__title">
+        History - {{ selectedName }}
+        <span>{{ isLastVariationPositive }}</span>
+      </h2>
+      <VariationChart :history="selectedChart" :type="selected.type" />
+      <button @click="handleClose">x</button>
     </div>
   </div>
 </template>
@@ -17,6 +34,7 @@ const { selectedChart } = useFinanceStore()
 <style scoped lang="scss">
 .overflow {
   position: fixed;
+  padding-top: var(--size-header);
   top: 0;
   left: 0;
   width: 100%;
@@ -38,13 +56,19 @@ const { selectedChart } = useFinanceStore()
 .modal {
   position: relative;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   background-color: var(--color-background-2);
   max-width: 1440px;
   width: calc(100% - 56px);
   padding: 40px 32px;
+  box-shadow: var(--shadow);
 
   &__title {
     margin: 0;
+    font-size: 2rem;
+    text-transform: capitalize;
   }
 }
 </style>
