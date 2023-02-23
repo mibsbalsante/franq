@@ -1,6 +1,7 @@
 import { fileURLToPath, URL } from "node:url"
 
 import { defineConfig } from "vite"
+import svgLoader from "vite-svg-loader"
 import vue from "@vitejs/plugin-vue"
 import vueJsx from "@vitejs/plugin-vue-jsx"
 
@@ -13,7 +14,23 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue(), vueJsx()],
+  plugins: [
+    vue(),
+    vueJsx(),
+    svgLoader({
+      defaultImport: "component",
+      svgoConfig: {
+        plugins: [
+          {
+            name: "addClassesToSVGElement",
+            params: {
+              classNames: ["fa-icon"],
+            },
+          },
+        ],
+      },
+    }),
+  ],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
@@ -21,6 +38,9 @@ export default defineConfig({
       "@cmp": fileURLToPath(new URL("./src/components", import.meta.url)),
       "@str": fileURLToPath(new URL("./src/stores", import.meta.url)),
       "@utl": fileURLToPath(new URL("./src/utils", import.meta.url)),
+      "@fa": fileURLToPath(
+        new URL("./src/assets/fontawesome/solid", import.meta.url)
+      ),
     },
   },
   server: {

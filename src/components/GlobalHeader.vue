@@ -95,10 +95,16 @@ const handleLogout = () => {
     padding: var(--spacing-form-elements);
     font-weight: 600;
     min-width: 120px;
+    transition: all 0.3s ease-in-out;
 
     &:focus-visible {
       outline: 2px solid var(--color-background);
       outline-offset: 4px;
+    }
+
+    &:hover {
+      background-color: var(--color-background);
+      color: var(--color-text);
     }
   }
 

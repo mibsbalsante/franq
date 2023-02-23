@@ -49,3 +49,9 @@ button[disabled] {
   padding: calc(var(--size-header) + 32px) 0 40px;
   min-height: 100vh;
 }
+
+.fa-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: var(--color-text);
+}

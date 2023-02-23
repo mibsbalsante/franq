@@ -2,6 +2,9 @@
 import { computed } from "vue"
 import { RouterLink } from "vue-router"
 
+import IconAngleUp from "@fa/angle-up.svg"
+import IconAngleDown from "@fa/angle-down.svg"
+
 const props = defineProps({
   id: String,
   type: String,
@@ -9,6 +12,8 @@ const props = defineProps({
   location: String,
   variation: Number,
 })
+
+const Icon = props.variation > 0 ? IconAngleUp : IconAngleDown
 
 const uri = computed(() => `/${props.type}/${props.id}`)
 </script>
@@ -24,7 +29,7 @@ const uri = computed(() => `/${props.type}/${props.id}`)
   >
     <h3 class="card__title">{{ props.name }}</h3>
     <p class="card__location">{{ props.location }}</p>
-    <p class="card__variation">{{ props.variation }}%</p>
+    <p class="card__variation"><Icon /> {{ props.variation }}%</p>
   </RouterLink>
 </template>
 
@@ -87,9 +92,19 @@ const uri = computed(() => `/${props.type}/${props.id}`)
 
   &__variation {
     grid-area: variation;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
     font-size: 2rem;
     font-weight: 600;
     color: var(--local-color-status);
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      fill: var(--local-color-status);
+    }
   }
 }
 </style>
