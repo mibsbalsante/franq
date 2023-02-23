@@ -2,18 +2,11 @@
 import { RouterView } from "vue-router"
 
 import { useFinanceStore } from "@str/finance"
+import { formatCurrency } from "@utl/format"
 import CurrencyCard from "@cmp/CurrencyCard.vue"
 import StockCard from "@cmp/StockCard.vue"
 
 const { stats } = useFinanceStore()
-
-const formatCurrency = (val, format = "BRL") => {
-  const formats = {
-    BRL: () => `R$ ${val.toFixed(2).replace(/\./, ",")}`,
-    USD: () => `$${val.toFixed(2)}`,
-  }
-  return val ? formats[format]() : ""
-}
 </script>
 
 <template>

@@ -4,6 +4,7 @@ import { ref, computed } from "vue"
 import { useRoute } from "vue-router"
 import { defineStore, storeToRefs } from "pinia"
 
+import { formatFullDate } from "@utl/format"
 import { saveToStorage, getFromStorage } from "@utl/storage"
 import { INTERVAL_AS_MILISECONDS } from "@utl/time"
 
@@ -24,6 +25,7 @@ const financeStore = defineStore("finance", () => {
     let chart = history.value.map(requests => ({
       ...requests.results[selected.value.type][selected.value.keyName],
       date: new Date(requests.date),
+      fullDate: formatFullDate(requests.date),
     }))
 
     chart = [...chart].sort(
