@@ -1,4 +1,5 @@
 <script setup>
+import VariationChart from "@cmp/VariationChart.vue"
 import { useFinanceStore } from "@str/finance"
 
 const { selectedChart } = useFinanceStore()
@@ -7,13 +8,8 @@ const { selectedChart } = useFinanceStore()
 <template>
   <div class="overflow">
     <div class="modal">
-      <h2>History</h2>
-
-      <ul>
-        <li v-for="moment in selectedChart" :key="moment.name">
-          {{ moment.variation }} - {{ moment.date }}
-        </li>
-      </ul>
+      <h2 class="modal__title">History</h2>
+      <VariationChart :history="selectedChart" />
     </div>
   </div>
 </template>
@@ -43,7 +39,12 @@ const { selectedChart } = useFinanceStore()
   position: relative;
   margin: auto;
   background-color: var(--color-background-2);
-  max-width: 1200px;
+  max-width: 1440px;
   width: calc(100% - 56px);
+  padding: 40px 32px;
+
+  &__title {
+    margin: 0;
+  }
 }
 </style>

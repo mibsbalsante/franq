@@ -687,6 +687,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kurkle/color@npm:^0.3.0":
+  version: 0.3.2
+  resolution: "@kurkle/color@npm:0.3.2"
+  checksum: 79e97b31f8f6efb28c69d373f94b0c7480226fe8ec95221f518ac998e156444a496727ce47de6d728eb5c3369288e794cba82cae34253deb0d472d3bfe080e49
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -1301,6 +1308,15 @@ __metadata:
   version: 0.7.0
   resolution: "chardet@npm:0.7.0"
   checksum: 6fd5da1f5d18ff5712c1e0aed41da200d7c51c28f11b36ee3c7b483f3696dabc08927fc6b227735eb8f0e1215c9a8abd8154637f3eff8cada5959df7f58b024d
+  languageName: node
+  linkType: hard
+
+"chart.js@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "chart.js@npm:4.2.1"
+  dependencies:
+    "@kurkle/color": ^0.3.0
+  checksum: 7319fdfd1e29812e87bbc07737e8c9072ff659bbc09ade8dd262f83424cd7e48f89afe5220e11e002c9f236883fae3f3adb8adc16acb4682b0ddcc0b661c3af9
   languageName: node
   linkType: hard
 
@@ -2086,6 +2102,7 @@ __metadata:
     "@vitejs/plugin-vue": ^4.0.0
     "@vitejs/plugin-vue-jsx": ^3.0.0
     "@vue/eslint-config-prettier": ^7.0.0
+    chart.js: ^4.2.1
     commitizen: ^4.3.0
     cz-conventional-changelog: ^3.3.0
     eslint: ^8.22.0
@@ -2095,6 +2112,7 @@ __metadata:
     sass: ^1.58.3
     vite: ^4.0.0
     vue: ^3.2.45
+    vue-chartjs: ^5.2.0
     vue-router: ^4.1.6
   languageName: unknown
   linkType: soft
@@ -3945,6 +3963,16 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: c3d92b7ab59095498e80e70a7847c7a4c4fd7f16f859c57dc93c0dc09ec57584819a929924e8d8858bdde157f0386ec37322bdb064da7f8f4854c8aa22d0beec
+  languageName: node
+  linkType: hard
+
+"vue-chartjs@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "vue-chartjs@npm:5.2.0"
+  peerDependencies:
+    chart.js: ^4.1.1
+    vue: ^3.0.0-0 || ^2.7.0
+  checksum: e707bcbe442d85a3ec23825620f6b1ba4f43eba67c68e1bd845ef5536b754c4447dc9a249f4ec92f8a29a479981b07382bd32b6449686676dd22d5e18f366ffa
   languageName: node
   linkType: hard
 
