@@ -1,3 +1,5 @@
+const zero = num => (num <= 9 ? "0" + num : num)
+
 export const formatFullDate = dt => {
   const date = new Date(dt)
   const month = date.getMonth() + 1
@@ -6,7 +8,9 @@ export const formatFullDate = dt => {
   const hours = date.getHours()
   const minutes = date.getMinutes()
 
-  return `${month}/${day}/${year} ${hours}:${minutes}`
+  return `${zero(month)}/${zero(day)}/${zero(year)} ${zero(hours)}:${zero(
+    minutes
+  )}`
 }
 
 export const formatCurrency = (val, format = "BRL") => {

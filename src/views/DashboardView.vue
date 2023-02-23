@@ -11,7 +11,7 @@ const { stats } = useFinanceStore()
 
 <template>
   <main class="page">
-    <div class="category">
+    <div class="category" v-if="stats?.stocks">
       <h2 class="category__title">Stocks</h2>
 
       <template v-for="(stock, id) in stats?.stocks" :key="stock.name">
@@ -19,7 +19,7 @@ const { stats } = useFinanceStore()
       </template>
     </div>
 
-    <div class="category">
+    <div class="category" v-if="stats?.currencies">
       <h2 class="category__title">Currencies</h2>
 
       <template
@@ -36,7 +36,7 @@ const { stats } = useFinanceStore()
       </template>
     </div>
 
-    <div class="category">
+    <div class="category" v-if="stats?.bitcoin">
       <h2 class="category__title">Bitcoin</h2>
 
       <template v-for="(crypto, id) in stats?.bitcoin" :key="crypto.name">
@@ -64,6 +64,7 @@ const { stats } = useFinanceStore()
 .category {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   gap: 36px 24px;
 
   @include container;

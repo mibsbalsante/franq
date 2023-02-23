@@ -33,7 +33,7 @@ const uri = computed(() => `/${props.type}/${props.id}`)
   position: relative;
   display: inline-flex;
   flex-direction: column-reverse;
-  max-width: 280px;
+  max-width: 256px;
   width: 100%;
   text-align: center;
   text-decoration: none;
@@ -41,6 +41,11 @@ const uri = computed(() => `/${props.type}/${props.id}`)
   background-color: var(--color-background-2);
   border-radius: 12px;
   border: 3px solid var(--local-border-color);
+
+  &:focus-visible {
+    --local-border-color: var(--color-primary);
+    outline: 0;
+  }
 
   &--positive {
     --local-color-status: var(--color-positive);
@@ -52,9 +57,12 @@ const uri = computed(() => `/${props.type}/${props.id}`)
     --local-border-color: var(--color-negative);
   }
 
-  &:focus-visible {
-    --local-border-color: var(--color-primary);
-    outline: 0;
+  @media (max-width: 768px) {
+    max-width: 46%;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%;
   }
 
   h3,

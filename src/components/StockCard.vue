@@ -49,6 +49,11 @@ const uri = computed(() => `/${props.type}/${props.id}`)
   border: 3px solid var(--local-border-color);
   box-shadow: var(--shadow);
 
+  &:focus-visible {
+    --local-border-color: var(--color-primary);
+    outline: 0;
+  }
+
   &--positive {
     --local-color-status: var(--color-positive);
   }
@@ -57,9 +62,12 @@ const uri = computed(() => `/${props.type}/${props.id}`)
     --local-color-status: var(--color-negative);
   }
 
-  &:focus-visible {
-    --local-border-color: var(--color-primary);
-    outline: 0;
+  @media (max-width: 768px) {
+    max-width: 46%;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%;
   }
 
   h3,

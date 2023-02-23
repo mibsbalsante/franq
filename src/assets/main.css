@@ -7,7 +7,6 @@
 }
 
 body {
-  min-height: 100vh;
   margin: 0;
   position: relative;
   font-weight: normal;
@@ -45,5 +44,8 @@ button[disabled] {
 
 #app {
   position: relative;
+  display: flex;
+  flex-direction: column;
   padding: calc(var(--size-header) + 32px) 0 40px;
+  min-height: 100vh;
 }

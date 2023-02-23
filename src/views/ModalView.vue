@@ -26,7 +26,7 @@ const handleClose = () => {
         <span>{{ isLastVariationPositive }}</span>
       </h2>
       <VariationChart :history="selectedChart" :type="selected.type" />
-      <button @click="handleClose">x</button>
+      <button @click="handleClose" title="Close">x</button>
     </div>
   </div>
 </template>
@@ -63,6 +63,8 @@ const handleClose = () => {
   max-width: 1440px;
   width: calc(100% - 56px);
   padding: 40px 32px;
+  overflow-y: auto;
+  max-height: calc(100vh - var(--size-header) - 12px);
   box-shadow: var(--shadow);
 
   &__title {
