@@ -3,6 +3,8 @@ import { useRouter, RouterLink } from "vue-router"
 
 import { useAuthStore, useAuthActions } from "@/stores/auth"
 
+import Icon from "@fa/piggy-bank.svg"
+
 const router = useRouter()
 const { username } = useAuthStore()
 const { logout } = useAuthActions()
@@ -16,8 +18,9 @@ const handleLogout = () => {
 <template>
   <header class="header">
     <nav class="header__container">
+      <Icon class="header__icon" />
       <RouterLink to="/" class="header__link-home">
-        <h1>Stock Market Stats</h1>
+        <h1>Finance APP</h1>
       </RouterLink>
 
       <template v-if="username">
@@ -54,6 +57,10 @@ const handleLogout = () => {
       padding-top: 8px;
       padding-bottom: 8px;
     }
+  }
+
+  &__icon {
+    fill: var(--color-white);
   }
 
   &__link-home {

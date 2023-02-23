@@ -107,6 +107,7 @@ const Icon = props.variation > 0 ? IconAngleUp : IconAngleDown
     svg {
       max-width: 1rem;
       max-height: 1rem;
+      fill: var(--color-white);
     }
   }
 }

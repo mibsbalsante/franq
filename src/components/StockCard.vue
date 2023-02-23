@@ -101,8 +101,7 @@ const uri = computed(() => `/${props.type}/${props.id}`)
     color: var(--local-color-status);
 
     svg {
-      width: 1.25rem;
-      height: 1.25rem;
+      margin-top: 6px;
       fill: var(--local-color-status);
     }
   }
